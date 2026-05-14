@@ -45,8 +45,8 @@ export default function ActivityChart() {
         </p>
       </div>
 
-      <div className="h-72 relative z-10">
-        <ResponsiveContainer width="100%" height="100%">
+     <div className="h-[300px] w-full min-w-0 relative z-10">
+        <ResponsiveContainer width="99%" height="100%">
   <LineChart
   data={data}
   margin={{

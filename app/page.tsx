@@ -2,8 +2,10 @@ import DashboardLayout from "@/components/layout/dashboardlayout";
 import StatsGrid from "@/components/dashboard/statsgrid";
 import ActivityChart from "@/components/dashboard/activityChart";
 import AIInsights from "@/components/dashboard/aiInsights";
+import { supabase } from "@/lib/supabase";
 
 export default function Home() {
+
   return (
     <DashboardLayout>
       <div>
