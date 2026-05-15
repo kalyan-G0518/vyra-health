@@ -3,6 +3,7 @@ import StatsGrid from "@/components/dashboard/statsgrid";
 import ActivityChart from "@/components/dashboard/activityChart";
 import AIInsights from "@/components/dashboard/aiInsights";
 import { supabase } from "@/lib/supabase";
+import HealthLogForm from "@/components/dashboard/healthlogform";
 
 export default function Home() {
 
@@ -22,6 +23,7 @@ export default function Home() {
         <ActivityChart />
 
         <AIInsights />
+        <HealthLogForm />
       </div>
     </DashboardLayout>
   );
