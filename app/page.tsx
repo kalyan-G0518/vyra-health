@@ -1,9 +1,11 @@
 import DashboardLayout from "@/components/layout/dashboardlayout";
 import DynamicStatsGrid from "@/components/dashboard/dynamicsstats";
 import ActivityChart from "@/components/dashboard/activityChart";
-import AIInsights from "@/components/dashboard/aiInsights";
 import { supabase } from "@/lib/supabase";
 import HealthLogForm from "@/components/dashboard/healthlogform";
+import RecentLogs from "@/components/dashboard/recentlogs";
+import SmartInsights from "@/components/dashboard/smartinsights";
+import GoalProgress from "@/components/dashboard/goalprogress";
 
 export default function Home() {
 
@@ -21,9 +23,12 @@ export default function Home() {
         <DynamicStatsGrid />
 
         <ActivityChart />
+        <GoalProgress />
+        <SmartInsights/>
 
-        <AIInsights />
+    
         <HealthLogForm />
+        <RecentLogs />
       </div>
     </DashboardLayout>
   );
