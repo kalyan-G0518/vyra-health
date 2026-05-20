@@ -1,5 +1,5 @@
 import DashboardLayout from "@/components/layout/dashboardlayout";
-import StatsGrid from "@/components/dashboard/statsgrid";
+import DynamicStatsGrid from "@/components/dashboard/dynamicsstats";
 import ActivityChart from "@/components/dashboard/activityChart";
 import AIInsights from "@/components/dashboard/aiInsights";
 import { supabase } from "@/lib/supabase";
@@ -18,7 +18,7 @@ export default function Home() {
           Here’s your AI-powered health overview.
         </p>
 
-        <StatsGrid />
+        <DynamicStatsGrid />
 
         <ActivityChart />
 
