@@ -6,6 +6,8 @@ import HealthLogForm from "@/components/dashboard/healthlogform";
 import RecentLogs from "@/components/dashboard/recentlogs";
 import SmartInsights from "@/components/dashboard/smartinsights";
 import GoalProgress from "@/components/dashboard/goalprogress";
+import WeeklyAnalytics from "@/components/dashboard/weeklyanalytics";
+import StreakTracker from "@/components/dashboard/streakxxx";
 
 export default function Home() {
 
@@ -28,6 +30,8 @@ export default function Home() {
 
     
         <HealthLogForm />
+        <StreakTracker/>
+        <WeeklyAnalytics/>
         <RecentLogs />
       </div>
     </DashboardLayout>
