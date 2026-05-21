@@ -8,6 +8,9 @@ import SmartInsights from "@/components/dashboard/smartinsights";
 import GoalProgress from "@/components/dashboard/goalprogress";
 import WeeklyAnalytics from "@/components/dashboard/weeklyanalytics";
 import StreakTracker from "@/components/dashboard/streakxxx";
+import TrendComparison from "@/components/dashboard/trendcomp";
+import WeeklySummary from "@/components/dashboard/weeklysummary";
+//import ActivityHeatmap from "@/components/dashboard/activityheatmap";
 
 export default function Home() {
 
@@ -32,6 +35,8 @@ export default function Home() {
         <HealthLogForm />
         <StreakTracker/>
         <WeeklyAnalytics/>
+        <TrendComparison/>
+        <WeeklySummary/>
         <RecentLogs />
       </div>
     </DashboardLayout>
