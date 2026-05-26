@@ -10,6 +10,7 @@ import {
   Brain,
   Settings,
   User,
+  Moon,
   UtensilsCrossed,
 } from "lucide-react";
 
@@ -30,6 +31,11 @@ const menuItems = [
   label: "Nutrition",
   href: "/nutrition",
   },
+  {
+  icon: Moon,
+  label: "Sleep",
+  href: "/sleep",
+},
 
   {
     icon: Brain,

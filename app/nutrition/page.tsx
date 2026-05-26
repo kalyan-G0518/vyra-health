@@ -2,6 +2,8 @@ import DashboardLayout from "@/components/layout/dashboardlayout";
 
 import NutritionLogForm from "@/components/dashboard/nutritionlog";
 import NutritionHistory from "@/components/dashboard/nutritionhistory";
+import NutritionAnalytics from "@/components/dashboard/nutritionanalytics";
+import NutritionInsights from "@/components/dashboard/nutritioninsights";
 
 export default function NutritionPage() {
   return (
@@ -22,6 +24,8 @@ export default function NutritionPage() {
         {/* Nutrition Form */}
         <NutritionLogForm />
         <NutritionHistory />
+        <NutritionAnalytics />
+        <NutritionInsights/>
       </div>
     </DashboardLayout>
   );
