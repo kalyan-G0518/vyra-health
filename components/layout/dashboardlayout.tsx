@@ -1,5 +1,6 @@
 import Sidebar from "./sidebar";
 import MobileNavbar from "./mobilenavbar";
+import Topbar from "./topbar";
 
 export default function DashboardLayout({
   children,
@@ -23,6 +24,7 @@ export default function DashboardLayout({
         <MobileNavbar />
 
         <main className="p-4 md:p-8">
+          <Topbar />
           {children}
         </main>
       </div>

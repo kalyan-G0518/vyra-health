@@ -11,6 +11,7 @@ import StreakTracker from "@/components/dashboard/streakxxx";
 import TrendComparison from "@/components/dashboard/trendcomp";
 import WeeklySummary from "@/components/dashboard/weeklysummary";
 //import ActivityHeatmap from "@/components/dashboard/activityheatmap";
+import WellnessScore from "@/components/dashboard/wellness";
 
 export default function Home() {
 
@@ -24,6 +25,7 @@ export default function Home() {
         <p className="text-zinc-400">
           Here’s your AI-powered health overview.
         </p>
+        <WellnessScore/>
 
         <DynamicStatsGrid />
 

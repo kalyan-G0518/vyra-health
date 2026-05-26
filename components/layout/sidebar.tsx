@@ -7,9 +7,6 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Activity,
-  Brain,
-  Settings,
-  User,
   Moon,
   UtensilsCrossed,
 } from "lucide-react";
@@ -26,54 +23,43 @@ const menuItems = [
     label: "Health",
     href: "/health",
   },
-  {
-  icon: UtensilsCrossed,
-  label: "Nutrition",
-  href: "/nutrition",
-  },
-  {
-  icon: Moon,
-  label: "Sleep",
-  href: "/sleep",
-},
 
   {
-    icon: Brain,
-    label: "AI Insights",
-    href: "/insights",
+    icon: UtensilsCrossed,
+    label: "Nutrition",
+    href: "/nutrition",
   },
 
   {
-    icon: User,
-    label: "Profile",
-    href: "/profile",
+    icon: Moon,
+    label: "Sleep",
+    href: "/sleep",
   },
 
-  {
-    icon: Settings,
-    label: "Settings",
-    href: "/settings",
-  },
+  
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 min-h-screen border-r border-white/10 bg-black/40 backdrop-blur-xl text-white p-6">
+    <aside className="relative w-72 min-h-screen border-r border-white/10 bg-black/40 backdrop-blur-2xl text-white px-6 py-8 overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-emerald-500/10 blur-3xl rounded-full" />
+
       {/* Logo */}
-      <div className="mb-10">
-        <h1 className="text-3xl font-bold">
+      <div className="relative z-10 mb-14">
+        <h1 className="text-4xl font-bold tracking-tight">
           Vyra
         </h1>
 
-        <p className="text-sm text-zinc-400 mt-1">
-          AI Health Tracker
+        <p className="text-sm text-zinc-500 mt-2">
+          AI Wellness Platform
         </p>
       </div>
 
       {/* Navigation */}
-      <nav className="space-y-3">
+      <nav className="relative z-10 flex flex-col gap-2">
         {menuItems.map((item) => {
           const isActive =
             pathname === item.href;
@@ -84,30 +70,34 @@ export default function Sidebar() {
               href={item.href}
             >
               <div
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl border transition-all duration-300 cursor-pointer group
+                className={`group flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 cursor-pointer
 
                 ${
                   isActive
-                    ? "bg-emerald-500/15 border-emerald-500/20 shadow-lg shadow-emerald-500/10"
-                    : "bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/10"
+                    ? "bg-white text-black shadow-2xl scale-[1.02]"
+                    : "hover:bg-white hover:text-black hover:scale-[1.02]"
                 }`}
               >
+                {/* Icon */}
                 <item.icon
-                  size={20}
+                  size={22}
                   className={`transition-all duration-300
+
                   ${
                     isActive
-                      ? "text-emerald-400"
-                      : "text-zinc-300 group-hover:text-white"
+                      ? "text-black"
+                      : "text-zinc-400 group-hover:text-black"
                   }`}
                 />
 
+                {/* Label */}
                 <span
-                  className={`font-medium transition-all duration-300
+                  className={`font-medium text-[15px] transition-all duration-300
+
                   ${
                     isActive
-                      ? "text-white"
-                      : "text-zinc-300 group-hover:text-white"
+                      ? "text-black"
+                      : "text-zinc-300 group-hover:text-black"
                   }`}
                 >
                   {item.label}

@@ -1,10 +1,8 @@
 import DashboardLayout from "@/components/layout/dashboardlayout";
 
-import WeeklyAnalytics from "@/components/dashboard/weeklyanalytics";
-
-import StreakTracker from "@/components/dashboard/streakxxx";
-
-import TrendComparison from "@/components/dashboard/trendcomp";
+import VitalsLogForm from "@/components/dashboard/vitalslog";
+import VitalsHistory from "@/components/dashboard/vitalshistory";
+import HealthInsights from "@/components/dashboard/healthinsights";
 
 export default function HealthPage() {
   return (
@@ -21,11 +19,9 @@ export default function HealthPage() {
           </p>
         </div>
 
-        <WeeklyAnalytics />
-
-        <StreakTracker />
-
-        <TrendComparison />
+        <VitalsLogForm />
+        <VitalsHistory />
+        <HealthInsights />
       </div>
     </DashboardLayout>
   );
