@@ -10,6 +10,7 @@ import {
   Brain,
   Settings,
   User,
+  UtensilsCrossed,
 } from "lucide-react";
 
 const menuItems = [
@@ -23,6 +24,11 @@ const menuItems = [
     icon: Activity,
     label: "Health",
     href: "/health",
+  },
+  {
+  icon: UtensilsCrossed,
+  label: "Nutrition",
+  href: "/nutrition",
   },
 
   {
