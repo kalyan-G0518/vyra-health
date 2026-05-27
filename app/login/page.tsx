@@ -4,6 +4,9 @@ import { useState } from "react";
 
 import { motion } from "framer-motion";
 
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 import {
   Mail,
   Lock,
@@ -13,6 +16,7 @@ import {
 import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] =
     useState("");
 
@@ -24,6 +28,15 @@ export default function LoginPage() {
 
   // LOGIN
   const handleLogin = async () => {
+    // Validation
+    if (!email || !password) {
+      toast.error(
+        "Please enter email and password"
+      );
+
+      return;
+    }
+
     setLoading(true);
 
     const { error } =
@@ -35,15 +48,27 @@ export default function LoginPage() {
     setLoading(false);
 
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
     } else {
-      window.location.href =
-        "/dashboard";
+      toast.success(
+        "Login successful!"
+      );
+
+      router.push("/dashboard");
     }
   };
 
   // SIGNUP
   const handleSignup = async () => {
+    // Validation
+    if (!email || !password) {
+      toast.error(
+        "Please fill all fields"
+      );
+
+      return;
+    }
+
     setLoading(true);
 
     const { error } =
@@ -55,20 +80,20 @@ export default function LoginPage() {
     setLoading(false);
 
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
     } else {
-      alert(
-        "Signup successful! Check your email for verification."
+      toast.success(
+        "Account created! Verify your email before logging in."
       );
     }
   };
 
-  // RESET PASSWORD
+  // FORGOT PASSWORD
   const handleForgotPassword =
     async () => {
       if (!email) {
-        alert(
-          "Enter your email first."
+        toast.error(
+          "Please enter your email first"
         );
 
         return;
@@ -84,19 +109,20 @@ export default function LoginPage() {
         );
 
       if (error) {
-        alert(error.message);
+        toast.error(error.message);
       } else {
-        alert(
-          "Password reset email sent!"
+        toast.success(
+          "Password reset link sent!"
         );
       }
     };
 
   return (
     <main className="relative min-h-screen bg-black text-white flex items-center justify-center overflow-hidden p-6">
-      {/* Glow */}
+      {/* Background Glow */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-3xl rounded-full" />
 
+      {/* Card */}
       <motion.div
         initial={{
           opacity: 0,
@@ -195,14 +221,18 @@ export default function LoginPage() {
                 : "Login"}
             </button>
 
-            {/* Signup */}
-            <button
-              onClick={handleSignup}
-              disabled={loading}
-              className="w-full bg-white/5 hover:bg-white hover:text-black border border-white/10 transition-all duration-300 rounded-2xl py-4 font-semibold"
-            >
-              Create Account
-            </button>
+            <div className="text-center pt-2">
+  <p className="text-zinc-400 text-sm">
+    Don’t have an account?{" "}
+
+    <a
+      href="/signup"
+      className="text-cyan-400 hover:text-cyan-300 transition"
+    >
+      Create Account
+    </a>
+  </p>
+</div>
           </div>
         </div>
       </motion.div>

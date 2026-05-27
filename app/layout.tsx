@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "react-hot-toast";
+
 
 const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
@@ -30,7 +32,21 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-mono", jetbrainsMono.variable)}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">{children}
+        <Toaster
+  position="top-right"
+  toastOptions={{
+    style: {
+      background: "#111",
+      color: "#fff",
+      border:
+        "1px solid rgba(255,255,255,0.1)",
+      borderRadius: "16px",
+      padding: "16px",
+    },
+  }}
+/>
+      </body>
     </html>
   );
 }
