@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Activity,
+  PersonStanding,
   Moon,
   UtensilsCrossed,
 } from "lucide-react";
@@ -23,6 +24,11 @@ const menuItems = [
     label: "Health",
     href: "/health",
   },
+  {
+  icon: PersonStanding,
+  label: "Activity",
+  href: "/activity",
+},
 
   {
     icon: UtensilsCrossed,
@@ -43,9 +49,9 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="relative w-72 min-h-screen border-r border-white/10 bg-black/40 backdrop-blur-2xl text-white px-6 py-8 overflow-hidden">
+    <aside className="relative w-[280px] h-screen border-r border-white/10 bg-black/40 backdrop-blur-2xl text-white px-6 py-8 overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-emerald-500/10 blur-3xl rounded-full" />
+      <div className="absolute bottom-0 left-0 w-[280px] h-72 bg-emerald-500/10 blur-3xl rounded-full" />
 
       {/* Logo */}
       <div className="relative z-10 mb-14">
