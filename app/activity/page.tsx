@@ -6,11 +6,13 @@ import { motion } from "framer-motion";
 
 import ActivityStats from "@/components/dashboard/activitystats";
 
-import ActivityForm from "@/components/dashboard/activityform";
-
-import ActivityHistory from "@/components/dashboard/activityhistory";
+import StepCounter from "@/components/dashboard/stepcounter";
 
 import WeeklyActivityChart from "@/components/dashboard/weeklyactivitychart";
+
+import WorkoutLogger from "@/components/dashboard/workoutlogger";
+
+import WorkoutHistory from "@/components/dashboard/activityhistory";
 
 export default function ActivityPage() {
   return (
@@ -37,25 +39,30 @@ export default function ActivityPage() {
             </h1>
 
             <p className="text-zinc-400 text-lg mt-3 max-w-2xl leading-8">
-              Monitor movement,
+              Track movement,
               workouts, calories,
-              steps and daily
+              steps and overall
               performance with
-              AI-powered wellness
-              tracking.
+              intelligent wellness
+              monitoring.
             </p>
           </div>
         </motion.div>
 
-        {/* Stats */}
-        <ActivityStats />
+        
 
+        {/* Daily Step Counter */}
+        <StepCounter />
+        
+        {/* Workout Logger */}
+        <WorkoutLogger />
 
         {/* Weekly Chart */}
         <WeeklyActivityChart />
 
-        {/* Activity History */}
-        <ActivityHistory />
+
+        {/* Workout History */}
+        <WorkoutHistory />
       </div>
     </DashboardLayout>
   );
