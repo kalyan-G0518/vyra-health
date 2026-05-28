@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { motion } from "framer-motion";
-
+import toast from "react-hot-toast";
 import {
   Apple,
   Droplets,
@@ -65,7 +65,7 @@ export default function NutritionLogForm() {
     setLoading(false);
 
     if (!error) {
-      alert("Nutrition log saved!");
+      toast.success("Nutrition log saved!");
 
       setMealName("");
       setCalories("");
@@ -73,7 +73,7 @@ export default function NutritionLogForm() {
       setCarbs("");
       setWater("");
     } else {
-      alert(
+      toast.error(
         "Error saving nutrition log"
       );
 

@@ -3,6 +3,8 @@
 import { useState } from "react";
 
 import { motion } from "framer-motion";
+ import toast
+  from "react-hot-toast";
 
 import {
   Moon,
@@ -65,14 +67,14 @@ export default function SleepLogForm() {
     setLoading(false);
 
     if (!error) {
-      alert("Sleep log saved!");
+      toast.success("Sleep log saved!");
 
       setSleepHours("");
       setBedtime("");
       setWakeTime("");
       setSleepQuality("Good");
     } else {
-      alert("Error saving sleep log");
+      toast.error("Error saving sleep log");
 
       console.error(error);
     }

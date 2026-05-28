@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/layout/dashboardlayout";
 
 import SleepLogForm from "@/components/dashboard/sleeplog";
+import SleepChart from "@/components/dashboard/sleepchart";
 import SleepHistory from "@/components/dashboard/sleephistory";
 import SleepInsights from "@/components/dashboard/sleepinsights";
 
@@ -23,6 +24,7 @@ export default function SleepPage() {
 
         {/* Sleep Form */}
         <SleepLogForm />
+        <SleepChart/>
         <SleepHistory />
         <SleepInsights/>
       </div>

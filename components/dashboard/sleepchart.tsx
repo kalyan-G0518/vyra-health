@@ -6,34 +6,34 @@ import {
   LineChart,
   Line,
   XAxis,
+  YAxis,
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
-  YAxis,
 } from "recharts";
 
 import { motion } from "framer-motion";
 
 import { supabase } from "@/lib/supabase";
 
-type ChartData = {
+type SleepData = {
   day: string;
 
-  steps: number;
+  sleep: number;
 };
 
-export default function WeeklyActivityChart() {
+export default function SleepChart() {
   const [data, setData] =
-    useState<ChartData[]>([]);
+    useState<SleepData[]>([]);
 
   const [loading, setLoading] =
     useState(true);
 
   useEffect(() => {
-    fetchActivityData();
+    fetchSleepData();
   }, []);
 
-  const fetchActivityData =
+  const fetchSleepData =
     async () => {
       setLoading(true);
 
@@ -50,10 +50,10 @@ export default function WeeklyActivityChart() {
 
       const { data: logs, error } =
         await supabase
-          .from("daily_activity")
+          .from("sleep_logs")
           .select("*")
           .eq("user_id", user.id)
-          .order("log_date", {
+          .order("created_at", {
             ascending: true,
           });
 
@@ -73,11 +73,11 @@ export default function WeeklyActivityChart() {
         return;
       }
 
-      // Convert logs into chart data
+      // Format chart data
       const formattedData =
         logs.map((log) => ({
           day: new Date(
-            log.log_date
+            log.created_at
           ).toLocaleDateString(
             "en-US",
             {
@@ -85,7 +85,10 @@ export default function WeeklyActivityChart() {
             }
           ),
 
-          steps: log.steps || 0,
+          sleep:
+            Number(
+              log.sleep_hours
+            ) || 0,
         }));
 
       setData(formattedData);
@@ -106,18 +109,18 @@ export default function WeeklyActivityChart() {
       className="relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
     >
       {/* Glow */}
-      <div className="absolute bottom-0 right-0 w-60 h-60 bg-cyan-500/10 blur-3xl rounded-full" />
+      <div className="absolute bottom-0 left-0 w-60 h-60 bg-violet-500/10 blur-3xl rounded-full" />
 
       <div className="relative z-10">
         {/* Header */}
         <h2 className="text-3xl font-bold mb-2">
-          Weekly Activity
+          Sleep Trends
         </h2>
 
         <p className="text-zinc-400 mb-8">
-          Your real-time movement
-          trends and weekly step
-          consistency
+          Your weekly sleep
+          consistency and recovery
+          patterns
         </p>
 
         {/* Chart */}
@@ -128,7 +131,7 @@ export default function WeeklyActivityChart() {
             </div>
           ) : data.length === 0 ? (
             <div className="h-full flex items-center justify-center text-zinc-500">
-              No activity data yet
+              No sleep data yet
             </div>
           ) : (
             <ResponsiveContainer
@@ -148,6 +151,7 @@ export default function WeeklyActivityChart() {
 
                 <YAxis
                   stroke="#a1a1aa"
+                  domain={[0, 12]}
                 />
 
                 <Tooltip
@@ -164,15 +168,15 @@ export default function WeeklyActivityChart() {
 
                 <Line
                   type="monotone"
-                  dataKey="steps"
-                  stroke="#22d3ee"
+                  dataKey="sleep"
+                  stroke="#a855f7"
                   strokeWidth={4}
                   dot={{
-                    r: 5,
-                    fill: "#22d3ee",
+                    r: 7,
+                    fill: "#a855f7",
                   }}
                   activeDot={{
-                    r: 8,
+                    r: 9,
                   }}
                 />
               </LineChart>
