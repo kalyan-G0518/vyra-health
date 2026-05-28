@@ -20,8 +20,9 @@ export default function HealthPage() {
         </div>
 
         <VitalsLogForm />
-        <VitalsHistory />
+        
         <HealthInsights />
+        <VitalsHistory />
       </div>
     </DashboardLayout>
   );

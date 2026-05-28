@@ -26,6 +26,9 @@ export default function SignupPage() {
   const [email, setEmail] =
     useState("");
 
+  const [fullName, setFullName] =
+  useState("");
+
   const [password, setPassword] =
     useState("");
 
@@ -62,6 +65,18 @@ export default function SignupPage() {
             "http://localhost:3000/login",
         },
       });
+      if (data.user) {
+  await supabase
+    .from("profiles")
+    .insert([
+      {
+        id: data.user.id,
+
+        full_name:
+          fullName,
+      },
+    ]);
+}
 
     setLoading(false);
 

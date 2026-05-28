@@ -23,9 +23,10 @@ export default function NutritionPage() {
 
         {/* Nutrition Form */}
         <NutritionLogForm />
-        <NutritionHistory />
+        
         <NutritionAnalytics />
         <NutritionInsights/>
+        <NutritionHistory />
       </div>
     </DashboardLayout>
   );

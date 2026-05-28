@@ -49,7 +49,7 @@ export default function SleepLogForm() {
 
     const { error } = await supabase
       .from("sleep_logs")
-      .insert([
+      .upsert([
         {
           user_id: user.id,
           sleep_hours:

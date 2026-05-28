@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { motion } from "framer-motion";
 
 import {
@@ -7,6 +9,8 @@ import {
   Flame,
   Moon,
 } from "lucide-react";
+
+import { supabase } from "@/lib/supabase";
 
 type RingProps = {
   value: number;
@@ -59,19 +63,16 @@ function ProgressRing({
       }}
       className="relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col items-center justify-center"
     >
-      {/* Glow */}
       <div
         className={`absolute inset-0 opacity-10 blur-3xl ${color}`}
       />
 
-      {/* Ring */}
       <div className="relative w-40 h-40 flex items-center justify-center">
         <svg
           height={radius * 2}
           width={radius * 2}
           className="rotate-[-90deg]"
         >
-          {/* Background */}
           <circle
             stroke="rgba(255,255,255,0.08)"
             fill="transparent"
@@ -81,7 +82,6 @@ function ProgressRing({
             cy={radius}
           />
 
-          {/* Progress */}
           <circle
             stroke="currentColor"
             className={`${color} transition-all duration-700`}
@@ -98,7 +98,6 @@ function ProgressRing({
           />
         </svg>
 
-        {/* Center Content */}
         <div className="absolute flex flex-col items-center">
           <div className="mb-2">
             {icon}
@@ -115,7 +114,6 @@ function ProgressRing({
         </div>
       </div>
 
-      {/* Label */}
       <h3 className="mt-5 text-lg font-semibold">
         {label}
       </h3>
@@ -124,11 +122,76 @@ function ProgressRing({
 }
 
 export default function DailyRings() {
+  const [steps, setSteps] =
+    useState(0);
+
+  const [calories, setCalories] =
+    useState(0);
+
+  const [sleep, setSleep] =
+    useState(0);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData =
+    async () => {
+      const {
+        data: { user },
+      } =
+        await supabase.auth.getUser();
+
+      if (!user) return;
+
+      // Activity
+      const { data: activity } =
+        await supabase
+          .from("daily_activity")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("created_at", {
+            ascending: false,
+          })
+          .limit(1)
+          .single();
+
+      // Sleep
+      const { data: sleepData } =
+        await supabase
+          .from("sleep_logs")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("created_at", {
+            ascending: false,
+          })
+          .limit(1)
+          .single();
+
+      if (activity) {
+        setSteps(
+          activity.steps || 0
+        );
+
+        setCalories(
+          activity.calories_burned ||
+            0
+        );
+      }
+
+      if (sleepData) {
+        setSleep(
+          Number(
+            sleepData.sleep_hours
+          ) || 0
+        );
+      }
+    };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-      {/* Steps */}
       <ProgressRing
-        value={7420}
+        value={steps}
         goal={10000}
         label="Steps"
         color="text-cyan-400"
@@ -140,9 +203,8 @@ export default function DailyRings() {
         }
       />
 
-      {/* Calories */}
       <ProgressRing
-        value={620}
+        value={calories}
         goal={900}
         label="Calories"
         color="text-orange-400"
@@ -154,9 +216,8 @@ export default function DailyRings() {
         }
       />
 
-      {/* Sleep */}
       <ProgressRing
-        value={7}
+        value={sleep}
         goal={8}
         label="Sleep"
         color="text-violet-400"

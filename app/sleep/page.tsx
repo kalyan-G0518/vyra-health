@@ -25,8 +25,9 @@ export default function SleepPage() {
         {/* Sleep Form */}
         <SleepLogForm />
         <SleepChart/>
-        <SleepHistory />
+        
         <SleepInsights/>
+        <SleepHistory />
       </div>
     </DashboardLayout>
   );

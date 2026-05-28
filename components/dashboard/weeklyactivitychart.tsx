@@ -6,10 +6,10 @@ import {
   LineChart,
   Line,
   XAxis,
+  YAxis,
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
-  YAxis,
 } from "recharts";
 
 import { motion } from "framer-motion";
@@ -26,71 +26,75 @@ export default function WeeklyActivityChart() {
   const [data, setData] =
     useState<ChartData[]>([]);
 
-  const [loading, setLoading] =
-    useState(true);
-
   useEffect(() => {
     fetchActivityData();
   }, []);
 
   const fetchActivityData =
     async () => {
-      setLoading(true);
-
       const {
         data: { user },
       } =
         await supabase.auth.getUser();
 
-      if (!user) {
-        setLoading(false);
-
-        return;
-      }
+      if (!user) return;
 
       const { data: logs, error } =
         await supabase
           .from("daily_activity")
           .select("*")
           .eq("user_id", user.id)
-          .order("log_date", {
+          .order("created_at", {
             ascending: true,
           });
 
-      if (error) {
+      if (error || !logs) {
         console.log(error);
 
-        setLoading(false);
-
         return;
       }
 
-      if (!logs || logs.length === 0) {
-        setData([]);
+      // Unique daily steps
+      const groupedData:
+        Record<string, number> = {};
 
-        setLoading(false);
+      logs.forEach((log) => {
+        const date =
+          new Date(
+            log.created_at
+          );
 
-        return;
-      }
-
-      // Convert logs into chart data
-      const formattedData =
-        logs.map((log) => ({
-          day: new Date(
-            log.log_date
-          ).toLocaleDateString(
+        const day =
+          date.toLocaleDateString(
             "en-US",
             {
               weekday: "short",
             }
-          ),
+          );
 
-          steps: log.steps || 0,
+        const steps =
+          Number(log.steps) || 0;
+
+        // Keep highest steps/day
+        if (
+          !groupedData[day] ||
+          steps >
+            groupedData[day]
+        ) {
+          groupedData[day] =
+            steps;
+        }
+      });
+
+      const formattedData =
+        Object.entries(
+          groupedData
+        ).map(([day, steps]) => ({
+          day,
+          steps,
         }));
 
       setData(formattedData);
-
-      setLoading(false);
     };
 
   return (
@@ -105,79 +109,64 @@ export default function WeeklyActivityChart() {
       }}
       className="relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
     >
-      {/* Glow */}
       <div className="absolute bottom-0 right-0 w-60 h-60 bg-cyan-500/10 blur-3xl rounded-full" />
 
       <div className="relative z-10">
-        {/* Header */}
         <h2 className="text-3xl font-bold mb-2">
           Weekly Activity
         </h2>
 
         <p className="text-zinc-400 mb-8">
-          Your real-time movement
-          trends and weekly step
-          consistency
+          Real-time movement trends
+          and step consistency
         </p>
 
-        {/* Chart */}
         <div className="h-80">
-          {loading ? (
-            <div className="h-full flex items-center justify-center text-zinc-500">
-              Loading chart...
-            </div>
-          ) : data.length === 0 ? (
-            <div className="h-full flex items-center justify-center text-zinc-500">
-              No activity data yet
-            </div>
-          ) : (
-            <ResponsiveContainer
-              width="100%"
-              height="100%"
-            >
-              <LineChart data={data}>
-                <CartesianGrid
-                  strokeDasharray="3 3"
-                  stroke="rgba(255,255,255,0.05)"
-                />
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
+            <LineChart data={data}>
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="rgba(255,255,255,0.05)"
+              />
 
-                <XAxis
-                  dataKey="day"
-                  stroke="#a1a1aa"
-                />
+              <XAxis
+                dataKey="day"
+                stroke="#a1a1aa"
+              />
 
-                <YAxis
-                  stroke="#a1a1aa"
-                />
+              <YAxis
+                stroke="#a1a1aa"
+              />
 
-                <Tooltip
-                  contentStyle={{
-                    background:
-                      "#111",
-                    border:
-                      "1px solid rgba(255,255,255,0.1)",
-                    borderRadius:
-                      "16px",
-                    color: "#fff",
-                  }}
-                />
+              <Tooltip
+                contentStyle={{
+                  background:
+                    "#111",
+                  border:
+                    "1px solid rgba(255,255,255,0.1)",
+                  borderRadius:
+                    "16px",
+                }}
+              />
 
-                <Line
-                  type="monotone"
-                  dataKey="steps"
-                  stroke="#22d3ee"
-                  strokeWidth={4}
-                  dot={{
-                    r: 5,
-                    fill: "#22d3ee",
-                  }}
-                  activeDot={{
-                    r: 8,
-                  }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          )}
+              <Line
+                type="monotone"
+                dataKey="steps"
+                stroke="#22d3ee"
+                strokeWidth={4}
+                dot={{
+                  r: 7,
+                  fill: "#22d3ee",
+                }}
+                activeDot={{
+                  r: 9,
+                }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </motion.div>

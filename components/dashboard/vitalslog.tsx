@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import { motion } from "framer-motion";
 
+ import toast from "react-hot-toast";
+
 import {
   HeartPulse,
   Activity,
@@ -73,7 +75,7 @@ export default function VitalsLogForm() {
     setLoading(false);
 
     if (!error) {
-      alert("Vitals saved!");
+      toast.success("Vitals saved!");
 
       setHeartRate("");
       setSpo2("");
@@ -81,7 +83,7 @@ export default function VitalsLogForm() {
       setDiastolicBP("");
       setStressLevel("Low");
     } else {
-      alert("Error saving vitals");
+      toast.error("Error saving vitals");
 
       console.error(error);
     }
