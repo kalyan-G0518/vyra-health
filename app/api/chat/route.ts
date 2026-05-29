@@ -89,6 +89,9 @@ Keep responses:
 - personalized
 - motivating
 - easy to read
+- under 150 words
+- maximum 5 bullet points
+- never write long essays
 
 Avoid medical diagnosis.
 

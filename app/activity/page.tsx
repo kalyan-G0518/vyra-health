@@ -12,7 +12,7 @@ import WeeklyActivityChart from "@/components/dashboard/weeklyactivitychart";
 
 import WorkoutLogger from "@/components/dashboard/workoutlogger";
 
-import WorkoutHistory from "@/components/dashboard/activityhistory";
+import ActivityHistory from "@/components/dashboard/activityhistory";
 
 export default function ActivityPage() {
   return (
@@ -62,7 +62,7 @@ export default function ActivityPage() {
 
 
         {/* Workout History */}
-        <WorkoutHistory />
+        <ActivityHistory />
       </div>
     </DashboardLayout>
   );

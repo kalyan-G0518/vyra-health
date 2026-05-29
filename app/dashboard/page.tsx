@@ -12,7 +12,7 @@ import WellnessScore from "@/components/dashboard/wellness";
 import AICoach from "@/components/dashboard/aicoach";
 import DailyRings from "@/components/dashboard/dailyrings";
 import AIInsights from "@/components/dashboard/aiInsights";
-import MyraAssistant from "@/components/ai/myra";
+
 import WellnessReminders from "@/components/dashboard/reminders";
 
 export default function DashboardPage() {

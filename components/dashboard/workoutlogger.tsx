@@ -46,51 +46,63 @@ export default function WorkoutLogger() {
 
     setLoading(true);
 
-    const {
-      data: { user },
-    } =
-      await supabase.auth.getUser();
+    try {
+      const {
+        data: { user },
+      } =
+        await supabase.auth.getUser();
 
-    if (!user) {
-      toast.error(
-        "Please login first"
-      );
+      if (!user) {
+        toast.error(
+          "Please login first"
+        );
 
-      setLoading(false);
+        setLoading(false);
 
-      return;
-    }
+        return;
+      }
 
-    const { error } =
-      await supabase
-        .from("workout_logs")
-        .insert([
-          {
-            user_id: user.id,
+      const { error } =
+        await supabase
+          .from("workout_logs")
+          .insert([
+            {
+              user_id: user.id,
 
-            workout_type:
-              workout,
+              workout_type:
+                workout,
 
-            calories_burned:
-              Number(calories),
+              calories_burned:
+                Number(calories),
 
-            active_minutes:
-              Number(minutes),
-          },
-        ]);
+              active_minutes:
+                Number(minutes),
 
-    setLoading(false);
+              created_at:
+                new Date().toISOString(),
+            },
+          ]);
 
-    if (error) {
-      toast.error(error.message);
-    } else {
+      if (error) {
+        throw error;
+      }
+
       toast.success(
-        "Workout logged!"
+        "Workout logged successfully!"
       );
 
       setCalories("");
       setMinutes("");
+    } catch (error: any) {
+      console.error(error);
+
+      toast.error(
+        error.message ||
+          "Failed to save workout"
+      );
     }
+
+    setLoading(false);
   };
 
   return (
@@ -109,7 +121,6 @@ export default function WorkoutLogger() {
       <div className="absolute bottom-0 left-0 w-60 h-60 bg-emerald-500/10 blur-3xl rounded-full" />
 
       <div className="relative z-10">
-        {/* Header */}
         <h2 className="text-3xl font-bold mb-2">
           Workout Logger
         </h2>
@@ -119,7 +130,6 @@ export default function WorkoutLogger() {
           sessions
         </p>
 
-        {/* Form */}
         <div className="grid md:grid-cols-3 gap-5">
           {/* Workout Type */}
           <div className="relative">
@@ -145,7 +155,6 @@ export default function WorkoutLogger() {
               )}
             </select>
 
-            {/* Arrow */}
             <div className="absolute inset-y-0 right-5 flex items-center pointer-events-none text-zinc-400">
               <ChevronDown
                 size={18}
@@ -180,11 +189,10 @@ export default function WorkoutLogger() {
           />
         </div>
 
-        {/* Save Button */}
         <button
           onClick={handleSave}
           disabled={loading}
-          className="mt-8 w-full bg-emerald-500 hover:bg-emerald-400 transition-all duration-300 rounded-2xl py-4 font-semibold text-black"
+          className="mt-8 w-full bg-emerald-500 hover:bg-emerald-400 transition-all duration-300 rounded-2xl py-4 font-semibold text-black disabled:opacity-50"
         >
           {loading
             ? "Saving..."

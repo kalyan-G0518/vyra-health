@@ -224,7 +224,7 @@ export default function MyraAssistant() {
                     }`}
                   >
                     <div
-                      className={`max-w-[80%] break-words overflow-hidden whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-7 ${
+                      className={`w-fit max-w-[320px] break-words overflow-hidden whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-7 ${
                         msg.role ===
                         "user"
                           ? "bg-cyan-500 text-black"
