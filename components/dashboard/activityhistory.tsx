@@ -6,12 +6,10 @@ import { motion } from "framer-motion";
 
 import { supabase } from "@/lib/supabase";
 
-type ActivityLog = {
-  id: string;
+type Activity = {
+  id: number;
 
-  workout_type: string;
-
-  steps: number;
+  activity_name: string;
 
   calories_burned: number;
 
@@ -22,32 +20,34 @@ type ActivityLog = {
 
 export default function ActivityHistory() {
   const [logs, setLogs] =
-    useState<ActivityLog[]>([]);
+    useState<Activity[]>([]);
 
   useEffect(() => {
-    fetchLogs();
+    fetchHistory();
   }, []);
 
-  const fetchLogs = async () => {
-    const {
-      data: { user },
-    } =
-      await supabase.auth.getUser();
+  const fetchHistory =
+    async () => {
+      const {
+        data: { user },
+      } =
+        await supabase.auth.getUser();
 
-    if (!user) return;
+      if (!user) return;
 
-    const { data } = await supabase
-      .from("activity_logs")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("created_at", {
-        ascending: false,
-      });
+      const { data } =
+        await supabase
+          .from("activity_logs")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("created_at", {
+            ascending: false,
+          })
+          .limit(3);
 
-    if (data) {
-      setLogs(data);
-    }
-  };
+      if (data)
+        setLogs(data);
+    };
 
   return (
     <motion.div
@@ -59,39 +59,42 @@ export default function ActivityHistory() {
         opacity: 1,
         y: 0,
       }}
-      className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+      className="bg-white/5 border border-white/10 rounded-3xl p-8"
     >
-      <h2 className="text-3xl font-bold mb-2">
-        Activity History
+      <h2 className="text-2xl font-bold mb-6">
+        Recent Activity
       </h2>
-
-      <p className="text-zinc-400 mb-8">
-        Your recent workouts and
-        movement logs
-      </p>
 
       <div className="space-y-4">
         {logs.map((log) => (
           <div
             key={log.id}
-            className="bg-black/40 border border-white/10 rounded-2xl p-5 flex items-center justify-between"
+            className="bg-black/30 border border-white/10 rounded-2xl p-4"
           >
-            <div>
-              <h3 className="text-xl font-semibold">
-                {log.workout_type}
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold">
+                {log.activity_name}
               </h3>
 
-              <p className="text-zinc-400 text-sm mt-1">
-                {log.steps} steps •{" "}
-                {log.calories_burned} cal
-                • {log.active_minutes} mins
-              </p>
+              <span className="text-zinc-400 text-sm">
+                {new Date(
+                  log.created_at
+                ).toLocaleDateString()}
+              </span>
             </div>
 
-            <div className="text-sm text-zinc-500">
-              {new Date(
-                log.created_at
-              ).toLocaleDateString()}
+            <div className="flex gap-6 mt-3 text-zinc-400 text-sm">
+              <span>
+                🔥 {
+                  log.calories_burned
+                } cal
+              </span>
+
+              <span>
+                ⏱️ {
+                  log.active_minutes
+                } mins
+              </span>
             </div>
           </div>
         ))}

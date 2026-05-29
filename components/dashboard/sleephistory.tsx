@@ -46,7 +46,7 @@ export default function SleepHistory() {
         .eq("user_id", user.id)
         .order("created_at", {
           ascending: false,
-        });
+        }).limit(3);
 
       if (!error && data) {
         setLogs(data);

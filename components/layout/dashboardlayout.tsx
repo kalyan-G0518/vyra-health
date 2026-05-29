@@ -7,6 +7,7 @@ import Sidebar from "./sidebar";
 import Topbar from "./topbar";
 
 import { Menu, X } from "lucide-react";
+import MyraAssistant from "@/components/ai/myra";
 
 export default function DashboardLayout({
   children,
@@ -74,6 +75,7 @@ export default function DashboardLayout({
 
         {/* Content */}
         {children}
+        <MyraAssistant />
       </main>
     </div>
   );
