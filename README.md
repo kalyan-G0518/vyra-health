@@ -200,7 +200,7 @@ Planned enhancements include:
 ### Dashboard
 
 ```md
-![Dashboard](docs/screenshots/dashboard.png)
+![Dashboard](docs/screenshots/dashboard.jpeg)
 ```
 
 ---
@@ -208,7 +208,7 @@ Planned enhancements include:
 ### Activity Tracking
 
 ```md
-![Activity](docs/screenshots/activity.png)
+![Activity](docs/screenshots/activity.jpeg)
 ```
 
 ---
@@ -216,7 +216,7 @@ Planned enhancements include:
 ### Sleep Monitoring
 
 ```md
-![Sleep](docs/screenshots/sleep.png)
+![Sleep](docs/screenshots/sleep.jpeg)
 ```
 
 ---
@@ -224,7 +224,7 @@ Planned enhancements include:
 ### Nutrition Tracking
 
 ```md
-![Nutrition](docs/screenshots/nutrition.png)
+![Nutrition](docs/screenshots/nutrition.jpeg)
 ```
 
 ---
@@ -232,7 +232,8 @@ Planned enhancements include:
 ### Myra AI Assistant
 
 ```md
-![Myra](docs/screenshots/myra.png)
+![Myra](docs/screenshots/myra-1.jpeg)
+![Myra](docs/screenshots/myra-2.jpeg)
 ```
 
 ---
