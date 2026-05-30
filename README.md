@@ -212,8 +212,7 @@ Planned enhancements include:
 
 
 ## 🤖 Myra AI Assistant
-![](docs/screenshots/myra-1.jpeg)
-![](docs/screenshots/myra-2.jpeg)
+![](docs/screenshots/myra.jpeg)
 
 
 ---
