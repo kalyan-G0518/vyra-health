@@ -197,43 +197,25 @@ Planned enhancements include:
 
 ## 📸 Screenshots
 
-### Dashboard
+## 📸 Screenshots
 
-```md
-![Dashboard](docs/screenshots/dashboard.png)
-```
+| Dashboard | Activity |
+|------------|------------|
+| ![](docs/screenshots/dashboard.jpeg) | ![](docs/screenshots/activity.jpeg) |
 
----
+| Sleep | Nutrition |
+|------------|------------|
+| ![](docs/screenshots/sleep.jpeg) | ![](docs/screenshots/nutrition.jpeg) |
 
-### Activity Tracking
+| Health | Profile |
+|------------|------------|
+| ![](docs/screenshots/health.jpeg) | ![](docs/screenshots/profile.jpeg) |
 
-```md
-![Activity](docs/screenshots/activity.png)
-```
+## 🤖 Myra AI Assistant
 
----
+![](docs/screenshots/myra-1.jpeg)
 
-### Sleep Monitoring
-
-```md
-![Sleep](docs/screenshots/sleep.png)
-```
-
----
-
-### Nutrition Tracking
-
-```md
-![Nutrition](docs/screenshots/nutrition.png)
-```
-
----
-
-### Myra AI Assistant
-
-```md
-![Myra](docs/screenshots/myra.png)
-```
+![](docs/screenshots/myra-2.jpeg)
 
 ---
 
