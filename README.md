@@ -227,15 +227,10 @@ Planned enhancements include:
 
 ### Kalyan Gutta
 
-**Master of Science in Computer Science**
+**MS grad in Computer Science**
 University of South Florida
 
-Passionate about:
-
-* Artificial Intelligence
-* Data Science
-* Full-Stack Development
-* Human-Centered Technology
+Driven by a passion for Data Science, UI/UX Design, Full-Stack Development, and Artificial Intelligence, I enjoy building products that combine meaningful user experiences with data-driven intelligence.
 
 ---
 
