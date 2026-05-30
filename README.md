@@ -197,8 +197,6 @@ Planned enhancements include:
 
 ## 📸 Screenshots
 
-## 📸 Screenshots
-
 | Dashboard | Activity |
 |------------|------------|
 | ![](docs/screenshots/dashboard.jpeg) | ![](docs/screenshots/activity.jpeg) |
@@ -211,11 +209,12 @@ Planned enhancements include:
 |------------|------------|
 | ![](docs/screenshots/health.jpeg) | ![](docs/screenshots/profile.jpeg) |
 
+
+
 ## 🤖 Myra AI Assistant
-
 ![](docs/screenshots/myra-1.jpeg)
-
 ![](docs/screenshots/myra-2.jpeg)
+
 
 ---
 
